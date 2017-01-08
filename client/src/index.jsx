@@ -30,8 +30,13 @@ class App extends React.Component {
     })
   }
 
-  addEntry () {
-    
+  addEntry (input) {
+    this.state.entries.push({
+        amount: 100,
+        date: new Date(),
+        title: 'added Entry',
+      });
+    this.updateSum();
   }
 
   deleteEntry (entryIndex) {
@@ -39,10 +44,14 @@ class App extends React.Component {
     this.updateSum();
   }
 
+  editEntry () {
+
+  }
+
   render () {
     return (
       <div className="mainDiv">
-        <p> Hello World! </p>
+        <button onClick={this.addEntry.bind(this)}>Add Entry</button>
         <EntryList entries={this.state.entries} delete={this.deleteEntry.bind(this)}/>
         <p> Aktuelles Guthaben ist {this.state.sum} </p>
       </div>

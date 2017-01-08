@@ -59,7 +59,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _entryList = __webpack_require__(/*! ./entryList.jsx */ 179);
+	var _entryList = __webpack_require__(/*! ./entryList.jsx */ 178);
 	
 	var _entryList2 = _interopRequireDefault(_entryList);
 	
@@ -110,7 +110,14 @@
 	    }
 	  }, {
 	    key: 'addEntry',
-	    value: function addEntry() {}
+	    value: function addEntry(input) {
+	      this.state.entries.push({
+	        amount: 100,
+	        date: new Date(),
+	        title: 'added Entry'
+	      });
+	      this.updateSum();
+	    }
 	  }, {
 	    key: 'deleteEntry',
 	    value: function deleteEntry(entryIndex) {
@@ -118,15 +125,18 @@
 	      this.updateSum();
 	    }
 	  }, {
+	    key: 'editEntry',
+	    value: function editEntry() {}
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'mainDiv' },
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          ' Hello World! '
+	          'button',
+	          { onClick: this.addEntry.bind(this) },
+	          'Add Entry'
 	        ),
 	        _react2.default.createElement(_entryList2.default, { entries: this.state.entries, 'delete': this.deleteEntry.bind(this) }),
 	        _react2.default.createElement(
@@ -22105,6 +22115,45 @@
 
 /***/ },
 /* 178 */
+/*!**********************************!*\
+  !*** ./client/src/entryList.jsx ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _entry = __webpack_require__(/*! ./entry.jsx */ 179);
+	
+	var _entry2 = _interopRequireDefault(_entry);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var EntryList = function EntryList(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'entry-list' },
+	    props.entries.map(function (item, index) {
+	      return _react2.default.createElement(_entry2.default, { amount: item.amount, date: item.date, title: item.title, index: index, 'delete': props.delete });
+	    })
+	  );
+	};
+	
+	EntryList.propTypes = {
+	  entries: _react2.default.PropTypes.array.isRequired
+	};
+	
+	exports.default = EntryList;
+
+/***/ },
+/* 179 */
 /*!******************************!*\
   !*** ./client/src/entry.jsx ***!
   \******************************/
@@ -22179,45 +22228,6 @@
 	}(_react2.default.Component);
 	
 	exports.default = Entry;
-
-/***/ },
-/* 179 */
-/*!**********************************!*\
-  !*** ./client/src/entryList.jsx ***!
-  \**********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _entry = __webpack_require__(/*! ./entry.jsx */ 178);
-	
-	var _entry2 = _interopRequireDefault(_entry);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var EntryList = function EntryList(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'entry-list' },
-	    props.entries.map(function (item, index) {
-	      return _react2.default.createElement(_entry2.default, { amount: item.amount, date: item.date, title: item.title, index: index, 'delete': props.delete });
-	    })
-	  );
-	};
-	
-	EntryList.propTypes = {
-	  entries: _react2.default.PropTypes.array.isRequired
-	};
-	
-	exports.default = EntryList;
 
 /***/ }
 /******/ ]);
