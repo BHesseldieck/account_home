@@ -137,11 +137,9 @@
 	  }, {
 	    key: 'editEntry',
 	    value: function editEntry(entryIndex, obj) {
-	      console.log(entryIndex, obj);
 	      for (var key in obj) {
 	        this.state.entries[entryIndex][key] = obj[key];
 	      }
-	      console.log(JSON.stringify(this.state));
 	      this.updateOrder();
 	      this.updateSum();
 	    }
@@ -22233,7 +22231,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { entryIndex: this.props.index },
+	        null,
 	        _react2.default.createElement(
 	          'p',
 	          null,

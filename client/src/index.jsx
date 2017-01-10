@@ -52,11 +52,9 @@ class App extends React.Component {
   }
 
   editEntry (entryIndex, obj) {
-    console.log(entryIndex, obj);
     for (var key in obj) {
       this.state.entries[entryIndex][key] = obj[key];
     }
-    console.log(JSON.stringify(this.state));
     this.updateOrder();
     this.updateSum();
   }
