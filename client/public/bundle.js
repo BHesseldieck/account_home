@@ -22240,7 +22240,7 @@
 	          ' This is an Entry with amount: ',
 	          this.props.amount,
 	          ', date: ',
-	          JSON.stringify(this.props.date.toJSON().slice(0, 10)),
+	          this.props.date.getDate() + '/' + this.props.date.getMonth() + 1 + '/' + this.props.date.getFullYear(),
 	          ', title: ',
 	          this.props.title,
 	          ', index: ',
