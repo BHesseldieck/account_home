@@ -137,8 +137,13 @@
 	  }, {
 	    key: 'editEntry',
 	    value: function editEntry(entryIndex, obj) {
-	
+	      console.log(entryIndex, obj);
+	      for (var key in obj) {
+	        this.state.entries[entryIndex][key] = obj[key];
+	      }
+	      console.log(JSON.stringify(this.state));
 	      this.updateOrder();
+	      this.updateSum();
 	    }
 	  }, {
 	    key: 'render',
@@ -22217,8 +22222,8 @@
 	      this.props.delete(this.props.index);
 	    }
 	  }, {
-	    key: 'edit',
-	    value: function edit() {
+	    key: 'swapEdit',
+	    value: function swapEdit() {
 	      this.setState({
 	        edit: !this.state.edit
 	      });
@@ -22235,7 +22240,7 @@
 	          ' This is an Entry with amount: ',
 	          this.props.amount,
 	          ', date: ',
-	          JSON.stringify(this.props.date),
+	          JSON.stringify(this.props.date.toJSON().slice(0, 10)),
 	          ', title: ',
 	          this.props.title,
 	          ', index: ',
@@ -22249,10 +22254,10 @@
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { onClick: this.edit.bind(this) },
+	          { onClick: this.swapEdit.bind(this) },
 	          ' EDIT ME '
 	        ),
-	        _react2.default.createElement(_entryEdit2.default, { editMe: this.state.edit, editPost: this.props.editPost, index: this.props.index })
+	        _react2.default.createElement(_entryEdit2.default, { editMe: this.state.edit, swapEdit: this.swapEdit.bind(this), editPost: this.props.editPost, index: this.props.index, data: this.props })
 	      );
 	    }
 	  }]);
@@ -22298,30 +22303,51 @@
 	    var _this = _possibleConstructorReturn(this, (EntryEdit.__proto__ || Object.getPrototypeOf(EntryEdit)).call(this, props));
 	
 	    _this.props = props;
+	    _this.data = {};
 	    return _this;
 	  }
 	
 	  _createClass(EntryEdit, [{
+	    key: "editDone",
+	    value: function editDone() {
+	      this.props.editPost(this.props.index, this.data);
+	      this.props.swapEdit();
+	    }
+	  }, {
+	    key: "changeAmount",
+	    value: function changeAmount(event) {
+	      this.data.amount = Number(event.target.value);
+	    }
+	  }, {
+	    key: "changeTitle",
+	    value: function changeTitle(event) {
+	      this.data.title = event.target.value;
+	    }
+	  }, {
+	    key: "changeDate",
+	    value: function changeDate(event) {
+	      this.data.date = new Date(event.target.value);
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      if (this.props.editMe) {
 	        return _react2.default.createElement(
 	          "div",
 	          null,
+	          "Amount: ",
+	          _react2.default.createElement("input", { type: "number", defaultValue: this.props.data.amount, name: "amount", onChange: this.changeAmount.bind(this) }),
+	          _react2.default.createElement("br", null),
+	          "Title: ",
+	          _react2.default.createElement("input", { type: "text", defaultValue: this.props.data.title, name: "title", onChange: this.changeTitle.bind(this) }),
+	          _react2.default.createElement("br", null),
+	          "Date: ",
+	          _react2.default.createElement("input", { type: "date", defaultValue: this.props.data.date.toJSON().slice(0, 10), name: "date", onChange: this.changeDate.bind(this) }),
+	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(
-	            "form",
-	            null,
-	            "First name: ",
-	            _react2.default.createElement("input", { type: "text", name: "fname" }),
-	            _react2.default.createElement("br", null),
-	            "Last name: ",
-	            _react2.default.createElement("input", { type: "text", name: "lname" }),
-	            _react2.default.createElement("br", null),
-	            _react2.default.createElement(
-	              "button",
-	              { onClick: this.props.editPost.call(this, this.props.index) },
-	              " Change "
-	            )
+	            "button",
+	            { onClick: this.editDone.bind(this) },
+	            " Change "
 	          )
 	        );
 	      }
