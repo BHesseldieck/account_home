@@ -83,7 +83,7 @@
 	      sum: 0,
 	      entries: [{
 	        amount: -350,
-	        date: new Date(),
+	        date: new Date(Number(new Date()) - 100000),
 	        title: 'new Entry'
 	      }, {
 	        amount: 650,
@@ -102,6 +102,7 @@
 	  }, {
 	    key: 'updateSum',
 	    value: function updateSum() {
+	      // currently recalculating, maybe fix to add argument's amount
 	      this.setState({
 	        sum: this.state.entries.reduce(function (acc, val) {
 	          return acc += val.amount;
@@ -109,9 +110,18 @@
 	      });
 	    }
 	  }, {
+	    key: 'updateOrder',
+	    value: function updateOrder() {
+	      this.setState({
+	        entries: this.state.entries.sort(function (a, b) {
+	          return b.date - a.date;
+	        })
+	      });
+	    }
+	  }, {
 	    key: 'addEntry',
 	    value: function addEntry(input) {
-	      this.state.entries.push({
+	      this.state.entries.unshift({
 	        amount: 100,
 	        date: new Date(),
 	        title: 'added Entry'
@@ -126,7 +136,10 @@
 	    }
 	  }, {
 	    key: 'editEntry',
-	    value: function editEntry() {}
+	    value: function editEntry(entryIndex, obj) {
+	
+	      this.updateOrder();
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -138,7 +151,7 @@
 	          { onClick: this.addEntry.bind(this) },
 	          'Add Entry'
 	        ),
-	        _react2.default.createElement(_entryList2.default, { entries: this.state.entries, 'delete': this.deleteEntry.bind(this) }),
+	        _react2.default.createElement(_entryList2.default, { entries: this.state.entries, 'delete': this.deleteEntry.bind(this), editPost: this.editEntry.bind(this) }),
 	        _react2.default.createElement(
 	          'p',
 	          null,
@@ -22141,7 +22154,7 @@
 	    'div',
 	    { className: 'entry-list' },
 	    props.entries.map(function (item, index) {
-	      return _react2.default.createElement(_entry2.default, { amount: item.amount, date: item.date, title: item.title, index: index, 'delete': props.delete });
+	      return _react2.default.createElement(_entry2.default, { amount: item.amount, date: item.date, title: item.title, index: index, 'delete': props.delete, editPost: props.editPost });
 	    })
 	  );
 	};
@@ -22171,6 +22184,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _entryEdit = __webpack_require__(/*! ./entryEdit.jsx */ 180);
+	
+	var _entryEdit2 = _interopRequireDefault(_entryEdit);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22188,6 +22205,9 @@
 	    var _this = _possibleConstructorReturn(this, (Entry.__proto__ || Object.getPrototypeOf(Entry)).call(this, props));
 	
 	    _this.props = props;
+	    _this.state = {
+	      edit: false
+	    };
 	    return _this;
 	  }
 	
@@ -22195,6 +22215,13 @@
 	    key: 'delete',
 	    value: function _delete() {
 	      this.props.delete(this.props.index);
+	    }
+	  }, {
+	    key: 'edit',
+	    value: function edit() {
+	      this.setState({
+	        edit: !this.state.edit
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -22219,7 +22246,13 @@
 	          'button',
 	          { onClick: this.delete.bind(this) },
 	          ' DELETE ME '
-	        )
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.edit.bind(this) },
+	          ' EDIT ME '
+	        ),
+	        _react2.default.createElement(_entryEdit2.default, { editMe: this.state.edit, editPost: this.props.editPost, index: this.props.index })
 	      );
 	    }
 	  }]);
@@ -22228,6 +22261,78 @@
 	}(_react2.default.Component);
 	
 	exports.default = Entry;
+
+/***/ },
+/* 180 */
+/*!**********************************!*\
+  !*** ./client/src/entryEdit.jsx ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var EntryEdit = function (_React$Component) {
+	  _inherits(EntryEdit, _React$Component);
+	
+	  function EntryEdit(props) {
+	    _classCallCheck(this, EntryEdit);
+	
+	    var _this = _possibleConstructorReturn(this, (EntryEdit.__proto__ || Object.getPrototypeOf(EntryEdit)).call(this, props));
+	
+	    _this.props = props;
+	    return _this;
+	  }
+	
+	  _createClass(EntryEdit, [{
+	    key: "render",
+	    value: function render() {
+	      if (this.props.editMe) {
+	        return _react2.default.createElement(
+	          "div",
+	          null,
+	          _react2.default.createElement(
+	            "form",
+	            null,
+	            "First name: ",
+	            _react2.default.createElement("input", { type: "text", name: "fname" }),
+	            _react2.default.createElement("br", null),
+	            "Last name: ",
+	            _react2.default.createElement("input", { type: "text", name: "lname" }),
+	            _react2.default.createElement("br", null),
+	            _react2.default.createElement(
+	              "button",
+	              { onClick: this.props.editPost.call(this, this.props.index) },
+	              " Change "
+	            )
+	          )
+	        );
+	      }
+	      return _react2.default.createElement("div", null);
+	    }
+	  }]);
+	
+	  return EntryEdit;
+	}(_react2.default.Component);
+	
+	exports.default = EntryEdit;
 
 /***/ }
 /******/ ]);

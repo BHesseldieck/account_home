@@ -9,7 +9,7 @@ class App extends React.Component {
       sum: 0,
       entries: [{
         amount: -350,
-        date: new Date(),
+        date: new Date( Number(new Date()) - 100000),
         title: 'new Entry',
       },
       {
@@ -25,13 +25,20 @@ class App extends React.Component {
   }
 
   updateSum () {
+    // currently recalculating, maybe fix to add argument's amount
     this.setState({
-      sum: this.state.entries.reduce((acc, val) => acc += val.amount, 0),
+      sum: this.state.entries.reduce((acc, val) => acc += val.amount, 0)
+    })
+  }
+
+  updateOrder () {
+    this.setState({
+      entries: this.state.entries.sort((a,b) => b.date - a.date)
     })
   }
 
   addEntry (input) {
-    this.state.entries.push({
+    this.state.entries.unshift({
         amount: 100,
         date: new Date(),
         title: 'added Entry',
@@ -44,15 +51,16 @@ class App extends React.Component {
     this.updateSum();
   }
 
-  editEntry () {
+  editEntry (entryIndex, obj) {
 
+    this.updateOrder();
   }
 
   render () {
     return (
       <div className="mainDiv">
         <button onClick={this.addEntry.bind(this)}>Add Entry</button>
-        <EntryList entries={this.state.entries} delete={this.deleteEntry.bind(this)}/>
+        <EntryList entries={this.state.entries} delete={this.deleteEntry.bind(this)} editPost={this.editEntry.bind(this)} />
         <p> Aktuelles Guthaben ist {this.state.sum} </p>
       </div>
     );
