@@ -63,6 +63,10 @@
 	
 	var _entryList2 = _interopRequireDefault(_entryList);
 	
+	var _addEntry = __webpack_require__(/*! ./addEntry.jsx */ 181);
+	
+	var _addEntry2 = _interopRequireDefault(_addEntry);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -81,6 +85,7 @@
 	
 	    _this.state = {
 	      sum: 0,
+	      addMe: false,
 	      entries: [{
 	        amount: -350,
 	        date: new Date(Number(new Date()) - 100000),
@@ -121,12 +126,16 @@
 	  }, {
 	    key: 'addEntry',
 	    value: function addEntry(input) {
-	      this.state.entries.unshift({
-	        amount: 100,
-	        date: new Date(),
-	        title: 'added Entry'
-	      });
+	      this.state.entries.unshift(input);
+	      this.updateOrder();
 	      this.updateSum();
+	    }
+	  }, {
+	    key: 'swapAdd',
+	    value: function swapAdd() {
+	      this.setState({
+	        addMe: !this.state.addMe
+	      });
 	    }
 	  }, {
 	    key: 'deleteEntry',
@@ -149,11 +158,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'mainDiv' },
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.addEntry.bind(this) },
-	          'Add Entry'
-	        ),
+	        _react2.default.createElement(_addEntry2.default, { addMe: this.state.addMe, addEntry: this.addEntry.bind(this), swapAdd: this.swapAdd.bind(this) }),
 	        _react2.default.createElement(_entryList2.default, { entries: this.state.entries, 'delete': this.deleteEntry.bind(this), editPost: this.editEntry.bind(this) }),
 	        _react2.default.createElement(
 	          'p',
@@ -22357,6 +22362,118 @@
 	}(_react2.default.Component);
 	
 	exports.default = EntryEdit;
+
+/***/ },
+/* 181 */
+/*!*********************************!*\
+  !*** ./client/src/addEntry.jsx ***!
+  \*********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var AddEntry = function (_React$Component) {
+	  _inherits(AddEntry, _React$Component);
+	
+	  function AddEntry(props) {
+	    _classCallCheck(this, AddEntry);
+	
+	    var _this = _possibleConstructorReturn(this, (AddEntry.__proto__ || Object.getPrototypeOf(AddEntry)).call(this, props));
+	
+	    _this.props = props;
+	    _this.data = {};
+	    _this.state = {
+	      amountSet: false,
+	      titleSet: false
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(AddEntry, [{
+	    key: "addDone",
+	    value: function addDone() {
+	      if (this.data.date === undefined) {
+	        this.data.date = new Date();
+	      }
+	      this.props.addEntry(this.data);
+	      this.props.swapAdd();
+	      this.data = {};
+	      this.setState({ amountSet: false, titleSet: false });
+	    }
+	  }, {
+	    key: "addAmount",
+	    value: function addAmount(event) {
+	      this.data.amount = Number(event.target.value);
+	      this.setState({ amountSet: true });
+	    }
+	  }, {
+	    key: "addTitle",
+	    value: function addTitle(event) {
+	      this.data.title = event.target.value;
+	      this.setState({ titleSet: true });
+	    }
+	  }, {
+	    key: "addDate",
+	    value: function addDate(event) {
+	      this.data.date = new Date(event.target.value);
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      if (this.props.addMe) {
+	        return _react2.default.createElement(
+	          "div",
+	          null,
+	          "Amount: ",
+	          _react2.default.createElement("input", { type: "number", placeholder: "How much?", name: "amount", onChange: this.addAmount.bind(this) }),
+	          _react2.default.createElement("br", null),
+	          "Title: ",
+	          _react2.default.createElement("input", { type: "text", placeholder: "Name it", name: "title", onChange: this.addTitle.bind(this) }),
+	          _react2.default.createElement("br", null),
+	          "Date: ",
+	          _react2.default.createElement("input", { type: "date", defaultValue: new Date().toJSON().slice(0, 10), name: "date", onChange: this.addDate.bind(this) }),
+	          _react2.default.createElement("br", null),
+	          _react2.default.createElement(
+	            "button",
+	            { onClick: this.addDone.bind(this), disabled: !this.state.amountSet || !this.state.titleSet },
+	            " Add "
+	          )
+	        );
+	      }
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "button",
+	          { onClick: this.props.swapAdd },
+	          "Add Entry"
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return AddEntry;
+	}(_react2.default.Component);
+	
+	exports.default = AddEntry;
 
 /***/ }
 /******/ ]);

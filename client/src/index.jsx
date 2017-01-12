@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import EntryList from './entryList.jsx';
+import AddEntry from './addEntry.jsx';
 
 class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       sum: 0,
+      addMe: false,
       entries: [{
         amount: -350,
         date: new Date( Number(new Date()) - 100000),
@@ -38,12 +40,15 @@ class App extends React.Component {
   }
 
   addEntry (input) {
-    this.state.entries.unshift({
-        amount: 100,
-        date: new Date(),
-        title: 'added Entry',
-      });
+    this.state.entries.unshift(input);
+    this.updateOrder();
     this.updateSum();
+  }
+
+  swapAdd () {
+    this.setState({
+      addMe: !this.state.addMe
+    })
   }
 
   deleteEntry (entryIndex) {
@@ -62,7 +67,7 @@ class App extends React.Component {
   render () {
     return (
       <div className="mainDiv">
-        <button onClick={this.addEntry.bind(this)}>Add Entry</button>
+        <AddEntry addMe={this.state.addMe} addEntry={this.addEntry.bind(this)} swapAdd={this.swapAdd.bind(this)} />
         <EntryList entries={this.state.entries} delete={this.deleteEntry.bind(this)} editPost={this.editEntry.bind(this)} />
         <p> Aktuelles Guthaben ist {this.state.sum} </p>
       </div>

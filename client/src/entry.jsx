@@ -23,7 +23,8 @@ class Entry extends React.Component {
   render () {
     return (
         <div>
-          <p> This is an Entry with amount: {this.props.amount}, date: {this.props.date.getDate() + '/' + this.props.date.getMonth() + 1 + '/' + this.props.date.getFullYear()}, title: {this.props.title}, index: {this.props.index} </p>
+          <p> This is an Entry with amount: {this.props.amount}, date: {this.props.date.getDate() + '/' 
+          + this.props.date.getMonth() + 1 + '/' + this.props.date.getFullYear()}, title: {this.props.title}, index: {this.props.index} </p>
           <button onClick={this.delete.bind(this)}> DELETE ME </button>
           <button onClick={this.swapEdit.bind(this)}> EDIT ME </button>
           <EntryEdit editMe={this.state.edit} swapEdit={this.swapEdit.bind(this)} editPost={this.props.editPost} index={this.props.index} data={this.props} />

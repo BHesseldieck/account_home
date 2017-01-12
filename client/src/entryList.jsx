@@ -14,4 +14,4 @@ EntryList.propTypes = {
   entries: React.PropTypes.array.isRequired
 };
 
-export default EntryList
+export default EntryList;
