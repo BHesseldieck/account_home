@@ -22162,7 +22162,7 @@
 	    'div',
 	    { className: 'entry-list' },
 	    props.entries.map(function (item, index) {
-	      return _react2.default.createElement(_entry2.default, { amount: item.amount, date: item.date, title: item.title, index: index, 'delete': props.delete, editPost: props.editPost });
+	      return _react2.default.createElement(_entry2.default, { key: index.toString(), amount: item.amount, date: item.date, title: item.title, index: index, 'delete': props.delete, editPost: props.editPost });
 	    })
 	  );
 	};
