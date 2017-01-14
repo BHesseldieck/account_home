@@ -94,6 +94,30 @@
 	        amount: 650,
 	        date: new Date(),
 	        title: 'second Entry'
+	      }, {
+	        amount: -350,
+	        date: new Date(Number(new Date()) - 100000),
+	        title: 'new Entry'
+	      }, {
+	        amount: 650,
+	        date: new Date(),
+	        title: 'second Entry'
+	      }, {
+	        amount: -350,
+	        date: new Date(Number(new Date()) - 100000),
+	        title: 'new Entry'
+	      }, {
+	        amount: 650,
+	        date: new Date(),
+	        title: 'second Entry'
+	      }, {
+	        amount: -350,
+	        date: new Date(Number(new Date()) - 100000),
+	        title: 'new Entry'
+	      }, {
+	        amount: 650,
+	        date: new Date(),
+	        title: 'second Entry'
 	      }]
 	    };
 	    return _this;
@@ -158,14 +182,22 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'mainDiv' },
-	        _react2.default.createElement(_addEntry2.default, { addMe: this.state.addMe, addEntry: this.addEntry.bind(this), swapAdd: this.swapAdd.bind(this) }),
-	        _react2.default.createElement(_entryList2.default, { entries: this.state.entries, 'delete': this.deleteEntry.bind(this), editPost: this.editEntry.bind(this) }),
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          ' Aktuelles Guthaben ist ',
-	          this.state.sum,
-	          ' '
+	          'div',
+	          { className: 'list' },
+	          _react2.default.createElement(_entryList2.default, { entries: this.state.entries, 'delete': this.deleteEntry.bind(this), editPost: this.editEntry.bind(this) })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'bottom' },
+	          _react2.default.createElement(_addEntry2.default, { addMe: this.state.addMe, addEntry: this.addEntry.bind(this), swapAdd: this.swapAdd.bind(this) }),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'sum' },
+	            ' Aktuelles Guthaben ist: ',
+	            this.state.sum,
+	            ' '
+	          )
 	        )
 	      );
 	    }
@@ -22240,12 +22272,12 @@
 	        _react2.default.createElement(
 	          'p',
 	          null,
-	          ' This is an Entry with amount: ',
+	          ' title: ',
+	          this.props.title,
+	          ', amount: ',
 	          this.props.amount,
 	          ', date: ',
 	          this.props.date.getDate() + '/' + this.props.date.getMonth() + 1 + '/' + this.props.date.getFullYear(),
-	          ', title: ',
-	          this.props.title,
 	          ', index: ',
 	          this.props.index,
 	          ' '
@@ -22441,7 +22473,7 @@
 	      if (this.props.addMe) {
 	        return _react2.default.createElement(
 	          "div",
-	          null,
+	          { className: "addForm" },
 	          "Amount: ",
 	          _react2.default.createElement("input", { type: "number", placeholder: "How much?", name: "amount", onChange: this.addAmount.bind(this) }),
 	          _react2.default.createElement("br", null),
@@ -22460,7 +22492,7 @@
 	      }
 	      return _react2.default.createElement(
 	        "div",
-	        null,
+	        { className: "addBtn" },
 	        _react2.default.createElement(
 	          "button",
 	          { onClick: this.props.swapAdd },

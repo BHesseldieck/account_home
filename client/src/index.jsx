@@ -18,6 +18,36 @@ class App extends React.Component {
         amount: 650,
         date: new Date(),
         title: 'second Entry',
+      },
+      {
+        amount: -350,
+        date: new Date( Number(new Date()) - 100000),
+        title: 'new Entry',
+      },
+      {
+        amount: 650,
+        date: new Date(),
+        title: 'second Entry',
+      },
+      {
+        amount: -350,
+        date: new Date( Number(new Date()) - 100000),
+        title: 'new Entry',
+      },
+      {
+        amount: 650,
+        date: new Date(),
+        title: 'second Entry',
+      },
+      {
+        amount: -350,
+        date: new Date( Number(new Date()) - 100000),
+        title: 'new Entry',
+      },
+      {
+        amount: 650,
+        date: new Date(),
+        title: 'second Entry',
       }]
     }
   }
@@ -67,9 +97,13 @@ class App extends React.Component {
   render () {
     return (
       <div className="mainDiv">
-        <AddEntry addMe={this.state.addMe} addEntry={this.addEntry.bind(this)} swapAdd={this.swapAdd.bind(this)} />
-        <EntryList entries={this.state.entries} delete={this.deleteEntry.bind(this)} editPost={this.editEntry.bind(this)} />
-        <p> Aktuelles Guthaben ist {this.state.sum} </p>
+        <div className="list">
+          <EntryList entries={this.state.entries} delete={this.deleteEntry.bind(this)} editPost={this.editEntry.bind(this)} />
+        </div>
+        <div className="bottom">
+          <AddEntry addMe={this.state.addMe} addEntry={this.addEntry.bind(this)} swapAdd={this.swapAdd.bind(this)} />
+          <span className="sum"> Aktuelles Guthaben ist: {this.state.sum} </span>
+        </div>
       </div>
     );
   }
