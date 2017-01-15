@@ -42,11 +42,11 @@ class AddEntry extends React.Component {
       return (
           <div>
             <div className="addForm">
-              Amount: <input type="number" placeholder="How much?" name="amount" onChange={this.addAmount.bind(this)}/><br/>
-              Title: <input type="text" placeholder="Name it" name="title" onChange={this.addTitle.bind(this)}/><br/>
-              Date: <input type="date" defaultValue={new Date().toJSON().slice(0,10)} name="date" onChange={this.addDate.bind(this)}/><br/>
+              Amount: <input className="addAm" type="number" placeholder="How much?" name="amount" onChange={this.addAmount.bind(this)}/><br/>
+              Title: <input className="addTi" type="text" placeholder="Name it" name="title" onChange={this.addTitle.bind(this)}/><br/>
+              Date: <input className="addDa" type="date" defaultValue={new Date().toJSON().slice(0,10)} name="date" onChange={this.addDate.bind(this)}/><br/>
             </div>
-            <div className="addEntryBtn"><Button onClick={this.addDone.bind(this)} disabled={!this.state.amountSet || !this.state.titleSet} bsStyle="primary" bsSize="large">Add</Button></div>
+            <div className="addEntryBtn"><Button onClick={this.addDone.bind(this)} disabled={!this.state.amountSet || !this.state.titleSet} bsStyle="danger" bsSize="large">Add</Button></div>
           </div>
         );
     }

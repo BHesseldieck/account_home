@@ -106,8 +106,8 @@ class App extends React.Component {
         </div>
         <div className="bottom">
           <AddEntry addMe={this.state.addMe} addEntry={this.addEntry.bind(this)} swapAdd={this.swapAdd.bind(this)} />
-          <span className="sum"> Aktuelles Guthaben ist:</span> 
-          <div className={"sumAmount " + (this.state.sum >= 0 ? 'greenColor' : 'redColor') }>{this.state.sum}</div>
+          <span className="sum"> Current Balance is: </span> 
+          <div className={"sumAmount " + (this.state.sum >= 0 ? 'greenColor' : 'redColor') }>{this.state.sum} €</div>
         </div>
       </div>
     );

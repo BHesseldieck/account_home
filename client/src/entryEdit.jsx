@@ -30,17 +30,17 @@ class EntryEdit extends React.Component {
     if (this.props.editMe) {
       return (
         <div>
-            Amount: <input type="number" defaultValue={this.props.data.amount} name="amount" onChange={this.changeAmount.bind(this)}/><br/>
-            Title: <input type="text" defaultValue={this.props.data.title} name="title" onChange={this.changeTitle.bind(this)}/><br/>
-            Date: <input type="date" defaultValue={this.props.data.date.toJSON().slice(0,10)} name="date" onChange={this.changeDate.bind(this)}/><br/>
-            <Button onClick={this.editDone.bind(this)}> Change </Button>
+            Amount: <input className="inAm" type="number" defaultValue={this.props.data.amount} name="amount" onChange={this.changeAmount.bind(this)}/><br/>
+            Title: <input className="inTi" type="text" defaultValue={this.props.data.title} name="title" onChange={this.changeTitle.bind(this)}/><br/>
+            Date: <input className="inDa" type="date" defaultValue={this.props.data.date.toJSON().slice(0,10)} name="date" onChange={this.changeDate.bind(this)}/><br/>
+            <Button className="changeBtn" onClick={this.editDone.bind(this)}> Change </Button>
         </div>
         );
     }
     return (
       <div>
-        <Button onClick={this.props.delete} bsStyle="primary" bsSize="xsmall"> DELETE ME </Button>
-        <Button className="editBtn" onClick={this.props.swapEdit} bsStyle="primary" bsSize="xsmall"> EDIT ME </Button>
+        <Button className="optionsBtn" onClick={this.props.delete} bsStyle="primary" bsSize="xsmall"> DELETE ME </Button>
+        <Button className="optionsBtn editBtn" onClick={this.props.swapEdit} bsStyle="primary" bsSize="xsmall"> EDIT ME </Button>
       </div>
       );
   }

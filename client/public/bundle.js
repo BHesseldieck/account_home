@@ -205,12 +205,13 @@
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'sum' },
-	            ' Aktuelles Guthaben ist:'
+	            ' Current Balance is: '
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: "sumAmount " + (this.state.sum >= 0 ? 'greenColor' : 'redColor') },
-	            this.state.sum
+	            this.state.sum,
+	            ' \u20AC'
 	          )
 	        )
 	      );
@@ -22291,7 +22292,8 @@
 	        _react2.default.createElement(
 	          'span',
 	          { className: "amountC " + (this.props.amount >= 0 ? 'greenColor' : 'redColor') },
-	          this.props.amount
+	          this.props.amount,
+	          ' \u20AC'
 	        ),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
@@ -22380,17 +22382,17 @@
 	          'div',
 	          null,
 	          'Amount: ',
-	          _react2.default.createElement('input', { type: 'number', defaultValue: this.props.data.amount, name: 'amount', onChange: this.changeAmount.bind(this) }),
+	          _react2.default.createElement('input', { className: 'inAm', type: 'number', defaultValue: this.props.data.amount, name: 'amount', onChange: this.changeAmount.bind(this) }),
 	          _react2.default.createElement('br', null),
 	          'Title: ',
-	          _react2.default.createElement('input', { type: 'text', defaultValue: this.props.data.title, name: 'title', onChange: this.changeTitle.bind(this) }),
+	          _react2.default.createElement('input', { className: 'inTi', type: 'text', defaultValue: this.props.data.title, name: 'title', onChange: this.changeTitle.bind(this) }),
 	          _react2.default.createElement('br', null),
 	          'Date: ',
-	          _react2.default.createElement('input', { type: 'date', defaultValue: this.props.data.date.toJSON().slice(0, 10), name: 'date', onChange: this.changeDate.bind(this) }),
+	          _react2.default.createElement('input', { className: 'inDa', type: 'date', defaultValue: this.props.data.date.toJSON().slice(0, 10), name: 'date', onChange: this.changeDate.bind(this) }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            _reactBootstrap.Button,
-	            { onClick: this.editDone.bind(this) },
+	            { className: 'changeBtn', onClick: this.editDone.bind(this) },
 	            ' Change '
 	          )
 	        );
@@ -22400,12 +22402,12 @@
 	        null,
 	        _react2.default.createElement(
 	          _reactBootstrap.Button,
-	          { onClick: this.props.delete, bsStyle: 'primary', bsSize: 'xsmall' },
+	          { className: 'optionsBtn', onClick: this.props.delete, bsStyle: 'primary', bsSize: 'xsmall' },
 	          ' DELETE ME '
 	        ),
 	        _react2.default.createElement(
 	          _reactBootstrap.Button,
-	          { className: 'editBtn', onClick: this.props.swapEdit, bsStyle: 'primary', bsSize: 'xsmall' },
+	          { className: 'optionsBtn editBtn', onClick: this.props.swapEdit, bsStyle: 'primary', bsSize: 'xsmall' },
 	          ' EDIT ME '
 	        )
 	      );
@@ -42083,13 +42085,13 @@
 	            'div',
 	            { className: 'addForm' },
 	            'Amount: ',
-	            _react2.default.createElement('input', { type: 'number', placeholder: 'How much?', name: 'amount', onChange: this.addAmount.bind(this) }),
+	            _react2.default.createElement('input', { className: 'addAm', type: 'number', placeholder: 'How much?', name: 'amount', onChange: this.addAmount.bind(this) }),
 	            _react2.default.createElement('br', null),
 	            'Title: ',
-	            _react2.default.createElement('input', { type: 'text', placeholder: 'Name it', name: 'title', onChange: this.addTitle.bind(this) }),
+	            _react2.default.createElement('input', { className: 'addTi', type: 'text', placeholder: 'Name it', name: 'title', onChange: this.addTitle.bind(this) }),
 	            _react2.default.createElement('br', null),
 	            'Date: ',
-	            _react2.default.createElement('input', { type: 'date', defaultValue: new Date().toJSON().slice(0, 10), name: 'date', onChange: this.addDate.bind(this) }),
+	            _react2.default.createElement('input', { className: 'addDa', type: 'date', defaultValue: new Date().toJSON().slice(0, 10), name: 'date', onChange: this.addDate.bind(this) }),
 	            _react2.default.createElement('br', null)
 	          ),
 	          _react2.default.createElement(
@@ -42097,7 +42099,7 @@
 	            { className: 'addEntryBtn' },
 	            _react2.default.createElement(
 	              _reactBootstrap.Button,
-	              { onClick: this.addDone.bind(this), disabled: !this.state.amountSet || !this.state.titleSet, bsStyle: 'primary', bsSize: 'large' },
+	              { onClick: this.addDone.bind(this), disabled: !this.state.amountSet || !this.state.titleSet, bsStyle: 'danger', bsSize: 'large' },
 	              'Add'
 	            )
 	          )
