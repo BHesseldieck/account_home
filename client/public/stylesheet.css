@@ -51,7 +51,7 @@
 
 .addForm {
     position: absolute;
-    top: -140px;
+    top: -134px;
     width: 370px;
     padding: 18px 0px 10px 20px;
     background-color: white;
@@ -90,6 +90,11 @@
 
 .changeBtn {
   margin-top: 10px;
+}
+
+input {
+  border: none;
+  border-bottom: 2px solid grey;
 }
 
 .inAm {

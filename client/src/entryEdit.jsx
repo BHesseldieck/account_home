@@ -33,7 +33,7 @@ class EntryEdit extends React.Component {
             Amount: <input className="inAm" type="number" defaultValue={this.props.data.amount} name="amount" onChange={this.changeAmount.bind(this)}/><br/>
             Title: <input className="inTi" type="text" defaultValue={this.props.data.title} name="title" onChange={this.changeTitle.bind(this)}/><br/>
             Date: <input className="inDa" type="date" defaultValue={this.props.data.date.toJSON().slice(0,10)} name="date" onChange={this.changeDate.bind(this)}/><br/>
-            <Button className="changeBtn" onClick={this.editDone.bind(this)}> Change </Button>
+            <Button className="changeBtn" onClick={this.editDone.bind(this)} bsStyle="primary"> Change </Button>
         </div>
         );
     }

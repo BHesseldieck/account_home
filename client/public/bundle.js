@@ -22392,7 +22392,7 @@
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            _reactBootstrap.Button,
-	            { className: 'changeBtn', onClick: this.editDone.bind(this) },
+	            { className: 'changeBtn', onClick: this.editDone.bind(this), bsStyle: 'primary' },
 	            ' Change '
 	          )
 	        );
