@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 class AddEntry extends React.Component {
 
@@ -39,15 +40,17 @@ class AddEntry extends React.Component {
   render () {
     if (this.props.addMe) {
       return (
-          <div className="addForm">
-            Amount: <input type="number" placeholder="How much?" name="amount" onChange={this.addAmount.bind(this)}/><br/>
-            Title: <input type="text" placeholder="Name it" name="title" onChange={this.addTitle.bind(this)}/><br/>
-            Date: <input type="date" defaultValue={new Date().toJSON().slice(0,10)} name="date" onChange={this.addDate.bind(this)}/><br/>
-            <button onClick={this.addDone.bind(this)} disabled={!this.state.amountSet || !this.state.titleSet}> Add </button>
+          <div>
+            <div className="addForm">
+              Amount: <input type="number" placeholder="How much?" name="amount" onChange={this.addAmount.bind(this)}/><br/>
+              Title: <input type="text" placeholder="Name it" name="title" onChange={this.addTitle.bind(this)}/><br/>
+              Date: <input type="date" defaultValue={new Date().toJSON().slice(0,10)} name="date" onChange={this.addDate.bind(this)}/><br/>
+            </div>
+            <div className="addEntryBtn"><Button onClick={this.addDone.bind(this)} disabled={!this.state.amountSet || !this.state.titleSet} bsStyle="primary" bsSize="large">Add</Button></div>
           </div>
         );
     }
-    return ( <div className="addBtn"><button onClick={this.props.swapAdd}>Add Entry</button></div> );
+    return ( <div><Button onClick={this.props.swapAdd} className="addBtn" bsStyle="danger" bsSize="large" block>Add Entry</Button></div> );
   }
 
 }

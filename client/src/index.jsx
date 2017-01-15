@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import EntryList from './entryList.jsx';
 import AddEntry from './addEntry.jsx';
+import { Button } from 'react-bootstrap';
 
 class App extends React.Component {
   constructor (props) {
@@ -97,12 +98,16 @@ class App extends React.Component {
   render () {
     return (
       <div className="mainDiv">
+        <div className="head">
+          <Button className="backBtn" bsSize="large"> Back </Button>
+        </div>
         <div className="list">
           <EntryList entries={this.state.entries} delete={this.deleteEntry.bind(this)} editPost={this.editEntry.bind(this)} />
         </div>
         <div className="bottom">
           <AddEntry addMe={this.state.addMe} addEntry={this.addEntry.bind(this)} swapAdd={this.swapAdd.bind(this)} />
-          <span className="sum"> Aktuelles Guthaben ist: {this.state.sum} </span>
+          <span className="sum"> Aktuelles Guthaben ist:</span> 
+          <div className={"sumAmount " + (this.state.sum >= 0 ? 'greenColor' : 'redColor') }>{this.state.sum}</div>
         </div>
       </div>
     );
